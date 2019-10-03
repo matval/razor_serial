@@ -1,2 +1,2 @@
 # razor_serial
-Sparfun Razor IMU M0 node for ROS
+Sparkfun Razor IMU M0 node for ROS

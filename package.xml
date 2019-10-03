@@ -2,12 +2,12 @@
 <package format="2">
   <name>razor_serial</name>
   <version>0.0.0</version>
-  <description>The imu_reading package</description>
+  <description>The Sparkfun Razor IMU M0 reading package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="hiro@todo.todo">hiro</maintainer>
+  <maintainer email="matvalverde@gmail.com">matval</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
