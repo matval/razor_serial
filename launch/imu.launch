@@ -1,0 +1,13 @@
+<launch>
+	<master auto="start"/>
+
+	<node pkg="razor_serial" type="imu_node" name="imu_node" output="screen">
+		<param name="port" value="/dev/serial/by-path/pci-0000:00:14.0-usb-0:1:1.0" />
+    		<param name="pub_rviz_tf" value="true" />
+
+		<remap from="imu" to="imu/data" />
+		<remap from="mag" to="mag/data" />
+  	</node>
+	
+	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find razor_serial)/rviz_cfg/imu_test.rviz" />
+</launch>
