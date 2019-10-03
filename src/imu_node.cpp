@@ -13,8 +13,8 @@
 
 int main(int argc, char ** argv)
 {
-	ros::init(argc, argv, "razor_node", ros::init_options::NoSigintHandler);
-	signal(SIGINT, mySigIntHandler);
+    ros::init(argc, argv, "razor_node", ros::init_options::NoSigintHandler);
+    signal(SIGINT, mySigIntHandler);
     ros::NodeHandle nh;
     ros::NodeHandle n_param ("~");
     
@@ -103,6 +103,7 @@ int main(int argc, char ** argv)
         0, 0.05, 0,
         0, 0, 0.05};
     
+    ros::Time stamp;
     std::string data, token;    
     int seq = 0;
     double roll, pitch, yaw;
@@ -111,6 +112,7 @@ int main(int argc, char ** argv)
 
     while(ros::ok() && razor.isOpen())
     {
+        stamp = ros::Time::now();
         // It reads one line of data
         data = razor.readline();        
 
@@ -169,7 +171,7 @@ int main(int argc, char ** argv)
         imu_msg.orientation.z = q[2];
         imu_msg.orientation.w = q[3];
         
-        imu_msg.header.stamp = ros::Time::now();
+        imu_msg.header.stamp = stamp;
         imu_msg.header.frame_id = frame_id;
         imu_msg.header.seq = seq;
         
@@ -180,13 +182,13 @@ int main(int argc, char ** argv)
             broadcaster.sendTransform(
             tf::StampedTransform(tf::Transform(tf::createQuaternionFromRPY(roll, pitch, yaw), 
             tf::Vector3(0.0, 0.0, 0.0)),
-            ros::Time::now(),
+            stamp,
             frame_id,
             parent_frame_id));
         }        
 
         mag_msg.header.frame_id = frame_id;
-        mag_msg.header.stamp = ros::Time::now();
+        mag_msg.header.stamp = stamp;
         mag_msg.header.seq = seq;
 
         mag_pub.publish(mag_msg);
